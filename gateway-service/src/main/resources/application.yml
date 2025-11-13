@@ -1,13 +1,12 @@
 spring:
   cloud:
     gateway:
-      mvc:
-        routes:
-          - id: r1
-            uri: http://localhost:8081
-            predicates:
-              - Path=/api/customers/**
-          - id: r2
-            uri: http://localhost:8082
-            predicates:
-              - Path=/api/products/**
+      routes:
+        - id: r1
+          uri: lb://CUSTOMER-SERVICE
+          predicates:
+            Path=/api/customers/**
+        - id: r2
+          uri: lb://INVENTORY-SERVICE
+          predicates:
+            Path=/api/products/**
